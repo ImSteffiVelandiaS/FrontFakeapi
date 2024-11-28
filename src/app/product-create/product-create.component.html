@@ -1,0 +1,53 @@
+<div class="container">
+
+    <h1>Crear Producto</h1>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="title">Título:</label>
+        <input id="title" formControlName="title" type="text" />
+        <div *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched">
+          <small>El título es requerido (mínimo 3 caracteres).</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="price">Precio:</label>
+        <input id="price" formControlName="price" type="number" />
+        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+          <small>El precio debe ser un valor positivo.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="description">Descripción:</label>
+        <textarea id="description" formControlName="description"></textarea>
+        <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+          <small>La descripción es requerida.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="categoryId">Categoría:</label>
+        <select id="categoryId" formControlName="categoryId">
+          <option value="" disabled>Seleccione una categoría</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
+          <small>La categoría es requerida.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="images">URL de Imagen:</label>
+        <input id="images" formControlName="images" type="text" />
+        <div *ngIf="productForm.get('images')?.invalid && productForm.get('images')?.touched">
+          <small>La URL de la imagen es requerida.</small>
+        </div>
+      </div>
+  
+        <button type="submit" [disabled]="productForm.invalid">Crear Producto</button>
+    </form>
+
+</div>

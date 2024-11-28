@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <h1>Productos</h1>
+        <!-- Botón para crear nuevo producto -->
+        <div class="create-button">
+            <button routerLink="/create-product" class="btn create">
+            Crear Nuevo Producto
+            </button>
+        </div>
+        <!--Mostrar Productos-->
+        <div class="col-md-4" *ngFor="let product of products">
+            <div class="card mb-4">
+                <img
+                class="card-img-top"
+                [src]="getFirstImage(product.images)"
+                alt="Product Image"
+                (error)="onImageError($event)"
+                />
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-price">${{ product.price }}</p>
+                    <button (click)="startEditing(product)" class="btn edit">Editar</button>
+                    <button (click)="deleteProduct(product.id)" class="btn delete">Eliminar</button>
+                </div>
+            </div>    
+        </div>
+
+ 
+  
+    <!-- Formulario de edición -->
+    <div class="modal" *ngIf="editingProduct">
+        <div class="modal-content">
+        <h2>Editar Producto</h2>
+        <form (ngSubmit)="saveProduct()">
+          <label for="title">Título:</label>
+          <input id="title" [(ngModel)]="editingProduct.title" name="title" required />
+      
+          <label for="price">Precio:</label>
+          <input id="price" type="number" [(ngModel)]="editingProduct.price" name="price" required />
+      
+          <label for="description">Descripción:</label>
+          <textarea id="description" [(ngModel)]="editingProduct.description" name="description"></textarea>
+      
+          <label for="categoryId">Categoría:</label>
+          <input
+            id="categoryId"
+            type="number"
+            [(ngModel)]="editingProduct.category.id"
+            name="categoryId"
+            required
+          />
+      
+          <label for="images">URL de Imagen:</label>
+          <input
+            id="images"
+            *ngFor="let image of editingProduct.images; let i = index"
+            [(ngModel)]="editingProduct.images[i]"
+            name="image-{{ i }}"
+            required
+          />
+      
+          <div class="actions">
+            <button type="submit" class="btn save">Guardar</button>
+            <button type="button" (click)="cancelEditing()" class="btn cancel">Cancelar</button>
+          </div>
+        </form>
+      </div>
+  </div>
+  </div>
+</div>
