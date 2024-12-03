@@ -25,47 +25,48 @@
                 </div>
             </div>    
         </div>
-
+    </div>
  
   
     <!-- Formulario de edición -->
     <div class="modal" *ngIf="editingProduct">
+      {{editingProduct}}
         <div class="modal-content">
-        <h2>Editar Producto</h2>
-        <form (ngSubmit)="saveProduct()">
-          <label for="title">Título:</label>
-          <input id="title" [(ngModel)]="editingProduct.title" name="title" required />
-      
-          <label for="price">Precio:</label>
-          <input id="price" type="number" [(ngModel)]="editingProduct.price" name="price" required />
-      
-          <label for="description">Descripción:</label>
-          <textarea id="description" [(ngModel)]="editingProduct.description" name="description"></textarea>
-      
-          <label for="categoryId">Categoría:</label>
-          <input
-            id="categoryId"
-            type="number"
-            [(ngModel)]="editingProduct.category.id"
-            name="categoryId"
-            required
-          />
-      
-          <label for="images">URL de Imagen:</label>
-          <input
-            id="images"
-            *ngFor="let image of editingProduct.images; let i = index"
-            [(ngModel)]="editingProduct.images[i]"
-            name="image-{{ i }}"
-            required
-          />
-      
-          <div class="actions">
-            <button type="submit" class="btn save">Guardar</button>
-            <button type="button" (click)="cancelEditing()" class="btn cancel">Cancelar</button>
-          </div>
-        </form>
-      </div>
-  </div>
-  </div>
+          <h2>Editar Producto</h2>
+          <form (ngSubmit)="saveProduct()">
+            <label for="title">Título:</label>
+            <input id="title" [(ngModel)]="editingProduct.title" name="title" required />
+        
+            <label for="price">Precio:</label>
+            <input id="price" type="number" [(ngModel)]="editingProduct.price" name="price" required />
+        
+            <label for="description">Descripción:</label>
+            <textarea id="description" [(ngModel)]="editingProduct.description" name="description"></textarea>
+        
+            <label for="categoryId">Categoría:</label>
+            <input
+              id="categoryId"
+              type="number"
+              [(ngModel)]="editingProduct.category.id"
+              name="categoryId"
+              required
+            />
+        
+            <label for="images">URL de Imagen:</label>
+            <input
+              id="images"
+              *ngFor="let image of editingProduct.images; let i = index"
+              [(ngModel)]="editingProduct.images[i]"
+              name="image-{{ i }}"
+              required
+            />
+        
+            <div class="actions">
+              <button type="submit" class="btn save">Guardar</button>
+              <button type="button" (click)="cancelEditing()" class="btn cancel">Cancelar</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    
 </div>
